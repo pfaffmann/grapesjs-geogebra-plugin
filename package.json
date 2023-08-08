@@ -1,0 +1,29 @@
+{
+  "name": "grapesjs-geogebra-plugin",
+  "version": "1.0.1",
+  "description": "Grapesjs Geogebra Plugin",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pfaffmann/grapesjs-geogebra-plugin.git"
+  },
+  "scripts": {
+    "start": "grapesjs-cli serve -p 8081",
+    "build": "grapesjs-cli build",
+    "bump": "npm version patch -m 'Bump v%s'"
+  },
+  "keywords": [
+    "grapesjs",
+    "plugin"
+  ],
+  "devDependencies": {
+    "grapesjs": "^0.21.4",
+    "grapesjs-cli": "^4.1.1",
+    "tslib": "^2.6.1",
+    "typescript": "^5.1.6"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "nanoid": "^4.0.2"
+  }
+}
