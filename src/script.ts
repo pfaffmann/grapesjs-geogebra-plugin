@@ -1,4 +1,4 @@
-import { GeoGebraAPI } from './types/geogebra';
+import { GeoGebraAPI, ReactGeoGebraParameters } from './types/geogebra';
 
 export const script = function (props: any) {
   const geogebraURL = 'https://www.geogebra.org/apps/deployggb.js';
@@ -7,27 +7,24 @@ export const script = function (props: any) {
 
     const els = document.querySelectorAll('[identifier="ggb"]');
     //it is not possible to have '-' in window[id]
-    const id = els[els.length - 1].id
-      .replace('container-', '')
-      .replace('-', '_');
-    els[els.length - 1].id = `container-${id}`;
+    const origId = els[els.length - 1].id;
+    const id = origId.replace(/(container-)/g, '').replace(/(-)/g, '_');
+    //always the last one from the list
+    const element = els[els.length - 1] as HTMLElement;
+    element.className = id;
+    element.innerHTML = `<div id="container-${id}"></div>`;
 
-    let params = Object.assign(
+    let params: ReactGeoGebraParameters = Object.assign(
       {
-        id: id,
-        width: 800,
-        height: 600,
-        showToolBar: true,
-        showMenuBar: true,
-      },
+        id,
+      } as ReactGeoGebraParameters,
       props
     );
 
     var applet = new window.GGBApplet(params, true);
-    console.log(id);
     applet.inject(`container-${id}`);
 
-    const el = document.getElementById(`container-${id}`);
+    const el = document.getElementById(origId);
     el?.removeAttribute('identifier'); //remove identifier to only have one element in els
   };
 

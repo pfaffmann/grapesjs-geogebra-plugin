@@ -1,14 +1,16 @@
 import loadComponents from './components';
 import loadBlocks from './blocks';
 import en from './locale/en';
-import { Editor } from 'grapesjs';
+import { Editor, PluginOptions } from 'grapesjs';
 
 export default (editor: Editor, opts = {}) => {
-  const options = {
+  const options: Required<PluginOptions> = {
     ...{
       i18n: {},
       // default options
     },
+    addBasicStyle: 'true',
+    stylePrefix: 'gjs-',
     ...opts,
   };
 
@@ -22,14 +24,4 @@ export default (editor: Editor, opts = {}) => {
       en,
       ...options.i18n,
     });
-
-  // TODO Remove
-  editor.on('load', () =>
-    editor.addComponents(
-      `<div style="margin:100px; padding:25px;">
-            Content loaded from the plugin
-        </div>`,
-      { at: 0 }
-    )
-  );
 };

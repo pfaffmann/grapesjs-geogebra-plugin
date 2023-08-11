@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-geogebra-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Grapesjs Geogebra Plugin",
   "main": "dist/index.js",
   "repository": {
