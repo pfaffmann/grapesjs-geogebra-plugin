@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { Applet, GeoGebraAPI } from './types/geogebra';
 
 interface generateRandomIdProps {
   size?: number;

@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { Applet } from './types/geogebra';
+import merge from 'lodash.merge';
 
 const removeApplet = (applets: Applet[], id: string): Applet[] =>
   applets.filter((applet) => applet.id !== id);
@@ -9,28 +10,24 @@ const addApplet = (applets: Applet[], applet: Applet) => [...applets, applet];
 const updateApplet = (
   applets: Applet[],
   id: string,
-  applet: Applet
-): Applet[] => applets.map((a) => (a.id === id ? applet : a));
+  data: Partial<Applet>
+): Applet[] => applets.map((a) => (a.id === id ? merge(a, data) : a));
 
 export class Store {
   applets: Applet[] = [];
-  newApplet: Partial<Applet> = {};
   updatedApplet: Partial<Applet> = {};
 
   constructor() {
     makeAutoObservable(this);
   }
-  addApplet() {
-    this.applets = addApplet(this.applets, this.newApplet as Applet);
-    this.newApplet = {};
+  addApplet(applet: Applet) {
+    this.applets = addApplet(this.applets, applet);
   }
 
   removeApplet(id: string) {
     this.applets = removeApplet(this.applets, id);
   }
-  updateApplet(id: string) {
-    this.applets = updateApplet(this.applets, id, this.updatedApplet as Applet);
+  updateApplet(id: string, data: Partial<Applet>) {
+    this.applets = updateApplet(this.applets, id, data);
   }
 }
-
-export const store = new Store();

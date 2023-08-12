@@ -1,5 +1,5 @@
 import { Component, Editor } from 'grapesjs';
-import { script } from './script';
+import { geogebraScript } from './script';
 import { traits } from './traits';
 import { generateRandomId } from './util';
 import { Store } from './store';
@@ -17,7 +17,6 @@ export default (editor: Editor, opts = {}) => {
 
   tm.addType('ggb-id-disabled', {
     createInput({ component }) {
-      console.log(component);
       const el = document.createElement('div');
       el.innerHTML = `
       <input class="text-disabled__type" type="text" disabled value="${component.ccid}" />`;
@@ -37,10 +36,11 @@ export default (editor: Editor, opts = {}) => {
     model: {
       defaults: {
         tagName: 'div',
+        id: null,
         draggable: true,
         droppable: false,
         attributes: { identifier: 'ggb' },
-        script,
+        script: geogebraScript,
         //props default value
         width: 800,
         height: 600,
@@ -119,7 +119,12 @@ export default (editor: Editor, opts = {}) => {
   editor.on('component:remove', (component: Component) => {
     if (component.attributes.type !== 'geogebra') return;
     const store = window.frames[1]['ggbStore'];
-    if (!store) alert('no store');
+    if (!store) return;
     store.removeApplet(component.ccid);
+  });
+
+  editor.on('component:update', () => {
+    const store = window.frames[1]['ggbStore'];
+    console.log(store.applets);
   });
 };
