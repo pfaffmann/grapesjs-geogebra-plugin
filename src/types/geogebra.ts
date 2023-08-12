@@ -1,3 +1,15 @@
+export type Applet = {
+  id: string;
+  api: GeoGebraAPI;
+  elements: { [key: string]: GeoGebraElement };
+  selectedElements: GeoGebraElement[];
+  views2D: { [key: string]: GeoGebraView2D };
+  view3D: { [key: string]: GeoGebraView3D };
+  mouse: GeoGebraMouse;
+  mode: GeoGebraMode;
+  log: (...data: any[]) => void;
+};
+
 export interface XYPosition {
   x: number;
   y: number;

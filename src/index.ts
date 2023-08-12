@@ -2,6 +2,7 @@ import loadComponents from './components';
 import loadBlocks from './blocks';
 import en from './locale/en';
 import { Editor, PluginOptions } from 'grapesjs';
+import { Store } from './store';
 
 export default (editor: Editor, opts = {}) => {
   const options: Required<PluginOptions> = {
@@ -24,4 +25,11 @@ export default (editor: Editor, opts = {}) => {
       en,
       ...options.i18n,
     });
+
+  editor.on('load', () => {
+    //create Global Variable for the store
+    if (window.frames[1]) {
+      window.frames[1]['ggbStore'] = new Store();
+    }
+  });
 };

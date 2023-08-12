@@ -17,6 +17,21 @@ export const script = function (props: any) {
     let params: ReactGeoGebraParameters = Object.assign(
       {
         id,
+        appletOnLoad: (api: GeoGebraAPI) => {
+          const store = window['ggbStore'];
+          store.newApplet = {
+            id,
+            api,
+            elements: {},
+            views2D: {},
+            view3D: {},
+            mouse: { viewNo: 0, viewName: '', x: 0, y: 0, hits: [] },
+            mode: { number: -1, name: '' },
+            selectedElements: [],
+            log: console.log,
+          };
+          store.addApplet();
+        },
       } as ReactGeoGebraParameters,
       props
     );

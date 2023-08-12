@@ -1,11 +1,13 @@
-import { Editor } from 'grapesjs';
+import { Component, Editor } from 'grapesjs';
 import { script } from './script';
 import { traits } from './traits';
 import { generateRandomId } from './util';
+import { Store } from './store';
 
 declare global {
   interface Window {
     GGBApplet: any;
+    ggbStore: any;
   }
 }
 
@@ -23,9 +25,7 @@ export default (editor: Editor, opts = {}) => {
     },
     createLabel({ label }) {
       return `<div>
-      
       ${label}
-     
     </div>`;
     },
   });
@@ -114,5 +114,12 @@ export default (editor: Editor, opts = {}) => {
       },
     },
     view: {},
+  });
+
+  editor.on('component:remove', (component: Component) => {
+    if (component.attributes.type !== 'geogebra') return;
+    const store = window.frames[1]['ggbStore'];
+    if (!store) alert('no store');
+    store.removeApplet(component.ccid);
   });
 };

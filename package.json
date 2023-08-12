@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-geogebra-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Grapesjs Geogebra Plugin",
   "main": "dist/index.js",
   "repository": {
@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "mobx": "^6.10.0",
     "nanoid": "^4.0.2"
   }
 }
