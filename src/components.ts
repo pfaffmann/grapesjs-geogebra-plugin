@@ -116,6 +116,17 @@ export default (editor: Editor, opts = {}) => {
     view: {},
   });
 
+  domc.addType('observer', {
+    extend: 'default',
+    model: {
+      defaults: {
+        tagName: 'div',
+      },
+    },
+    extendView: 'default',
+    view: {},
+  });
+
   editor.on('component:remove', (component: Component) => {
     if (component.attributes.type !== 'geogebra') return;
     const store = window.frames[1]['ggbStore'];
@@ -124,7 +135,6 @@ export default (editor: Editor, opts = {}) => {
   });
 
   editor.on('component:update', () => {
-    const store = window.frames[1]['ggbStore'];
-    console.log(store.applets);
+    //ccid changes
   });
 };

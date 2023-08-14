@@ -26,7 +26,7 @@ export default (editor: Editor, opts = {}) => {
 
   bm.add('observer-block', {
     label: 'Observer',
-    content: { type: 'text' },
+    content: { type: 'observer' },
     media: `<svg enable-background="new -0.258 -0.548 123.547 123.539" viewBox="-0.258 -0.548 123.547 123.539" xmlns="http://www.w3.org/2000/svg">
     <path d="m38.555 18.48h15.688v11.227h-15.688z"/>
     <path d="m71.938,66.918c-1.492,0-2.68-1.203-2.68-2.688v-31.007h23.695l9.992,42.312-.055,2.734v18.695c0,1.445-1.172,2.617-2.609,2.617h-23.047c-1.445,0-2.617-1.172-2.617-2.617v-30.046h-2.484"/>
